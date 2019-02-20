@@ -17,16 +17,18 @@ class QueryContainer extends Component {
       currentNestLevel: 0,
       totalNestLevel: 0,
       fetchedData: false,
+      propertyFilter: '',
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeQuery = this.handleChangeQuery.bind(this);
+    this.handleChangePropertyFilter = this.handleChangePropertyFilter.bind(this);
     this.appendQuery = this.appendQuery.bind(this);
     this.handleSubmitQuery = this.handleSubmitQuery.bind(this);
     this.handleResetQuery = this.handleResetQuery.bind(this);
     this.submitBreadcrumbQuery = this.submitBreadcrumbQuery.bind(this);
   }
 
-  handleChange(event) {
+  handleChangeQuery(event) {
     event.persist();
 
     const queryValue = event.target.value;
@@ -119,8 +121,10 @@ class QueryContainer extends Component {
     // Add to the total nest level before current gets reset
     totalNestLevel += currentNestLevel;
 
+    const hangingQueryId = `query${currentNestLevel}`;
+
     // Pick up the hanging query input
-    if (focusedInput.type === 'text' && focusedInput.value !== '') {
+    if (focusedInput.id === hangingQueryId && focusedInput.value !== '') {
       currentQuery[currentNestLevel] = focusedInput.value;
     }
 
@@ -178,11 +182,20 @@ class QueryContainer extends Component {
     });
   }
 
+  handleChangePropertyFilter(event) {
+    const property = event.target.value;
+
+    this.setState({
+      propertyFilter: property,
+    });
+  }
+
   render() {
     const {
       fullQuery,
       currentQuery,
       currentNestLevel,
+      propertyFilter,
       activeQueryText,
       fetchedData,
     } = this.state;
@@ -196,13 +209,15 @@ class QueryContainer extends Component {
           currentNestLevel={currentNestLevel}
           activeQueryText={activeQueryText}
           lastQueryIndex={lastQueryIndex}
+          propertyFilter={propertyFilter}
           handleSubmitQuery={this.handleSubmitQuery}
           handleResetQuery={this.handleResetQuery}
-          handleChange={this.handleChange}
+          handleChangeQuery={this.handleChangeQuery}
+          handleChangePropertyFilter={this.handleChangePropertyFilter}
           appendQuery={this.appendQuery}
           unlockQuery={this.unlockQuery}
         />
-        <QueryResults fetchedData={fetchedData} />
+        <QueryResults fetchedData={fetchedData} propertyFilter={propertyFilter} />
       </div>
     );
   }

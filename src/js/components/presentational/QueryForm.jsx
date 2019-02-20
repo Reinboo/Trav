@@ -6,12 +6,14 @@ import QueryInput from './QueryInput';
 const QueryForm = (
   {
     currentQuery,
+    propertyFilter,
     currentNestLevel,
     activeQueryText,
     lastQueryIndex,
     handleSubmitQuery,
     handleResetQuery,
-    handleChange,
+    handleChangePropertyFilter,
+    handleChangeQuery,
     appendQuery,
     unlockQuery,
   },
@@ -40,7 +42,7 @@ const QueryForm = (
           // Set focus on last input
           autofocus={(currentNestLevel === index) ? 'autofocus' : ''}
 
-          handleChange={handleChange}
+          handleChange={handleChangeQuery}
           appendQuery={appendQuery}
           unlockQuery={unlockQuery}
         />
@@ -48,6 +50,7 @@ const QueryForm = (
     </Wrapper>
     <input type="submit" value="Fetch" />
     <input type="button" value="Reset" onClick={handleResetQuery} />
+    <input type="text" value={propertyFilter} placeholder="Child property..." onChange={handleChangePropertyFilter} />
   </form>
 );
 
@@ -57,7 +60,7 @@ QueryForm.propTypes = {
   activeQueryText: PropTypes.string.isRequired,
   lastQueryIndex: PropTypes.number.isRequired,
   handleSubmitQuery: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  handleChangeQuery: PropTypes.func.isRequired,
   appendQuery: PropTypes.func.isRequired,
   unlockQuery: PropTypes.func.isRequired,
 };

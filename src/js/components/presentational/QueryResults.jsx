@@ -1,12 +1,11 @@
 import React from 'react';
-// import firebase from 'firebase';
-// import Database 'firebase/database';
 import PropTypes from 'prop-types';
 
-function printResults(snapshot) {
+function printResults(snapshot, propertyFilter = '') {
   if (snapshot) {
     const snapshotChildren = [];
 
+    // Add snapshot children to an array
     if (snapshot.hasChildren()) {
       snapshot.forEach((child) => {
         snapshotChildren.push(child);
@@ -20,24 +19,36 @@ function printResults(snapshot) {
         grandchildren = printResults(child);
       }
 
-      const display = child.hasChildren()
-        ? (
-          <div>
-            {child.key}
-          </div>
-        )
-        : (
-          <div>
-            {`${child.key}: ${child.val()}`}
-          </div>
-        );
+      const isFiltered = (propertyFilter !== '')
+        ? !child.hasChild(propertyFilter)
+        : false;
 
-      return (
-        <li key={child.key}>
-          {display}
-          {grandchildren}
-        </li>
-      );
+      let display = null;
+
+      if (!isFiltered) {
+        display = child.hasChildren()
+          ? (
+            <div>
+              {child.key}
+            </div>
+          )
+          : (
+            <div>
+              {`${child.key}: ${child.val()}`}
+            </div>
+          );
+      }
+
+      if (display) {
+        return (
+          <li key={child.key}>
+            {display}
+            {grandchildren}
+          </li>
+        );
+      }
+
+      return null;
     });
 
     return (
@@ -51,14 +62,28 @@ function printResults(snapshot) {
 }
 
 // eslint-disable-next-line react/prop-types
-const QueryResults = ({ fetchedData }) => (
+const QueryResults = ({ fetchedData, propertyFilter }) => (
   <section>
-    {printResults(fetchedData)}
+    {printResults(fetchedData, propertyFilter)}
   </section>
 );
 
 QueryResults.propTypes = {
-  // fetchedData: PropTypes.node.isRequired,
+  fetchedData: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      val: PropTypes.func.isRequired,
+      hasChild: PropTypes.func.isRequired,
+      hasChildren: PropTypes.func.isRequired,
+      forEach: PropTypes.func.isRequired,
+      key: PropTypes.string.isRequired,
+    }),
+  ]).isRequired,
+  propertyFilter: PropTypes.string,
+};
+
+QueryResults.defaultProps = {
+  propertyFilter: '',
 };
 
 export default QueryResults;
