@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as Firebase from 'firebase/app';
 import 'firebase/database';
+import styled from 'styled-components';
 import QueryForm from '../presentational/QueryForm';
 import QueryResults from '../presentational/QueryResults';
 import QueryBreadcrumbs from '../presentational/QueryBreadcrumbs';
@@ -203,7 +204,7 @@ class QueryContainer extends Component {
     const lastQueryIndex = currentQuery.length - 1;
 
     return (
-      <div>
+      <Wrapper>
         <QueryBreadcrumbs queries={fullQuery} handleClick={this.submitBreadcrumbQuery} />
         <QueryForm
           currentQuery={currentQuery}
@@ -219,9 +220,14 @@ class QueryContainer extends Component {
           unlockQuery={this.unlockQuery}
         />
         <QueryResults fetchedData={fetchedData} propertyFilter={propertyFilter} />
-      </div>
+      </Wrapper>
     );
   }
 }
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 export default QueryContainer;
