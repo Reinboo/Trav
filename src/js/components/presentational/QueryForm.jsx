@@ -58,9 +58,12 @@ QueryForm.propTypes = {
   currentQuery: PropTypes.arrayOf(PropTypes.string).isRequired,
   currentNestLevel: PropTypes.number.isRequired,
   activeQueryText: PropTypes.string.isRequired,
+  propertyFilter: PropTypes.string.isRequired,
   lastQueryIndex: PropTypes.number.isRequired,
   handleSubmitQuery: PropTypes.func.isRequired,
   handleChangeQuery: PropTypes.func.isRequired,
+  handleResetQuery: PropTypes.func.isRequired,
+  handleChangePropertyFilter: PropTypes.func.isRequired,
   appendQuery: PropTypes.func.isRequired,
   unlockQuery: PropTypes.func.isRequired,
 };

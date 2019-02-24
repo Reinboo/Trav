@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import * as firebase from 'firebase';
-import QueryContainer from './js/components/container/QueryContainer.jsx';
+import * as firebase from 'firebase/app';
+import QueryContainer from './js/components/container/QueryContainer';
 
 // Initialize Firebase
 const config = {
@@ -13,7 +13,6 @@ const config = {
   messagingSenderId: '264009264782',
 };
 firebase.initializeApp(config);
-
 
 const wrapper = document.getElementById('formm');
 wrapper ? ReactDOM.render(<QueryContainer />, wrapper) : false;

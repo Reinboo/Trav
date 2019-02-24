@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import * as Firebase from 'firebase';
+import * as Firebase from 'firebase/app';
+import 'firebase/database';
 import QueryForm from '../presentational/QueryForm';
 import QueryResults from '../presentational/QueryResults';
 import QueryBreadcrumbs from '../presentational/QueryBreadcrumbs';

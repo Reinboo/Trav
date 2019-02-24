@@ -28,14 +28,14 @@ function printResults(snapshot, propertyFilter = '') {
       if (!isFiltered) {
         display = child.hasChildren()
           ? (
-            <div>
+            <span>
               {child.key}
-            </div>
+            </span>
           )
           : (
-            <div>
+            <span>
               {`${child.key}: ${child.val()}`}
-            </div>
+            </span>
           );
       }
 
