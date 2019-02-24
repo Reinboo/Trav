@@ -46,8 +46,8 @@ QueryInput.propTypes = {
 };
 
 const Input = styled.input`
-  color: red;
-  max-width: 100px;
+  color: #2b2b2b;
+  max-width: 8vw;
 
   &.locked {
     display: none;
@@ -57,7 +57,7 @@ const Input = styled.input`
 const Label = styled.label`
   position: relative;
   display: none;
-  color: blue;
+  color: #263238;
   height: 100%;
 
   &:hover {
