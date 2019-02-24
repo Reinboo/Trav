@@ -19,6 +19,7 @@ const QueryForm = (
   },
 ) => (
   <form onSubmit={handleSubmitQuery}>
+    <span>Query:</span>
     <Wrapper>
       {currentQuery.map((value, index) => (
         <QueryInput
@@ -48,9 +49,22 @@ const QueryForm = (
         />
       ))}
     </Wrapper>
-    <input type="submit" value="Fetch" />
-    <input type="button" value="Reset" onClick={handleResetQuery} />
-    <input type="text" value={propertyFilter} placeholder="Child property..." onChange={handleChangePropertyFilter} />
+    <FilterWrapper>
+      <label htmlFor="child-filter">
+        Filter:
+        <input
+          type="text"
+          id="child-filter"
+          value={propertyFilter}
+          placeholder="Child property..."
+          onChange={handleChangePropertyFilter}
+        />
+      </label>
+    </FilterWrapper>
+    <ButtonWrapper>
+      <Button type="submit" className="fetch" value="Fetch" />
+      <Button type="button" className="reset" value="Reset" onClick={handleResetQuery} />
+    </ButtonWrapper>
   </form>
 );
 
@@ -77,6 +91,48 @@ const Wrapper = styled.div`
   * {
     grid-row: 1/2;
   }
+`;
+
+const FilterWrapper = styled.div`
+  display: flex;
+  margin: 10px 0;
+  
+  input {
+    display: block; 
+  }
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  margin: 10px;
+`;
+
+const Button = styled.input`
+    width: 5rem;
+    height: 2rem;
+    margin: .5rem;
+    border-radius: 3px;
+    transition: background .2s linear;
+    
+    &.fetch {
+      background: #c8e6c9;
+      border: 1px solid #4caf50;
+    }
+    
+    &.fetch:hover {
+      background: #4caf50;
+      cursor: pointer;
+    }
+    
+    &.reset {
+      background: #e6ee9c;
+      border: 1px solid #cddc39;
+    }
+    
+    &.reset:hover {
+      background: #cddc39;
+      cursor: pointer;
+    }
 `;
 
 export default QueryForm;
