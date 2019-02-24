@@ -205,7 +205,6 @@ class QueryContainer extends Component {
 
     return (
       <Wrapper>
-        <QueryBreadcrumbs queries={fullQuery} handleClick={this.submitBreadcrumbQuery} />
         <QueryForm
           currentQuery={currentQuery}
           currentNestLevel={currentNestLevel}
@@ -219,6 +218,7 @@ class QueryContainer extends Component {
           appendQuery={this.appendQuery}
           unlockQuery={this.unlockQuery}
         />
+        <QueryBreadcrumbs queries={fullQuery} handleClick={this.submitBreadcrumbQuery} />
         <QueryResults fetchedData={fetchedData} propertyFilter={propertyFilter} />
       </Wrapper>
     );
@@ -228,6 +228,7 @@ class QueryContainer extends Component {
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
+  font-family: sans-serif;
 `;
 
 export default QueryContainer;
