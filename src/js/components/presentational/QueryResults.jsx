@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 function printResults(snapshot, propertyFilter = '') {
   if (snapshot) {
@@ -41,10 +42,10 @@ function printResults(snapshot, propertyFilter = '') {
 
       if (display) {
         return (
-          <li key={child.key}>
+          <ListItem key={child.key}>
             {display}
             {grandchildren}
-          </li>
+          </ListItem>
         );
       }
 
@@ -52,9 +53,9 @@ function printResults(snapshot, propertyFilter = '') {
     });
 
     return (
-      <ul>
+      <List>
         {childrenList}
-      </ul>
+      </List>
     );
   }
 
@@ -63,9 +64,9 @@ function printResults(snapshot, propertyFilter = '') {
 
 // eslint-disable-next-line react/prop-types
 const QueryResults = ({ fetchedData, propertyFilter }) => (
-  <section>
+  <Wrapper>
     {printResults(fetchedData, propertyFilter)}
-  </section>
+  </Wrapper>
 );
 
 QueryResults.propTypes = {
@@ -85,5 +86,36 @@ QueryResults.propTypes = {
 QueryResults.defaultProps = {
   propertyFilter: '',
 };
+
+const Wrapper = styled.section`
+  border-top: 1px solid lightgrey;
+`;
+
+const List = styled.ul`
+  position: relative;
+  padding-left: 3ch;
+  margin: 2px 0;
+  margin-left: 1ch;
+  list-style-type: none;
+  border-left: 1px solid #9e9e9e;
+    
+  &::before {
+    content: '●—';
+    position: absolute;
+    left: -.65ch;
+    color: #9e9e9e;
+  }
+`;
+
+const ListItem = styled.li`
+  position: relative;
+  
+  &:not(:first-child)::before {
+    content: '●—';
+    position: absolute;
+    left: -3.65ch;
+    color: #9e9e9e;
+  }
+`;
 
 export default QueryResults;
