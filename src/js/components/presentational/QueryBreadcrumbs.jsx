@@ -23,6 +23,7 @@ const Breadcrumb = styled.button`
   position: relative;
   background: none;
   border: none;
+  margin: 5px 0;
   margin-right: 1rem;
   padding: 0;
   text-decoration: underline;

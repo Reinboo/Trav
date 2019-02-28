@@ -229,6 +229,10 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   font-family: sans-serif;
+  
+  * {
+    box-sizing: border-box;
+  }
 `;
 
 export default QueryContainer;

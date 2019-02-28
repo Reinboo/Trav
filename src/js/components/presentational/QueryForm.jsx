@@ -99,6 +99,8 @@ const FilterWrapper = styled.div`
   
   input {
     display: block; 
+    margin: 5px 0;
+    padding: 5px;
   }
 `;
 

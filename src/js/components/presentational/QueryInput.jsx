@@ -48,6 +48,8 @@ QueryInput.propTypes = {
 const Input = styled.input`
   color: #2b2b2b;
   max-width: 8vw;
+  padding: 5px;
+  margin: 5px 0;
 
   &.locked {
     display: none;
