@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 function printResults(snapshot, propertyFilter = '') {
   if (snapshot) {
+    if (!snapshot.exists()) {
+      return <div>Not found</div>;
+    }
     const snapshotChildren = [];
 
     // Add snapshot children to an array
